@@ -1,6 +1,7 @@
 import React from 'react'
 import SelectLocation from '../components/SelectLocation'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import SelectEmotion from '../components/SelectEmotion'
 
 const defaultAction = {
@@ -50,18 +51,12 @@ export default function Form( {pushAction, lastAction }) {
    }
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
+      <Link id="closeForm" to="/" className="navLink">Back to map</Link>
         <h2>Add your conversation!</h2>
         <label htmlFor="description">
             What was your conversation?
             </label>
         <textarea name="actionDescription" id="description" value={newAction.actionDescription} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
-              {/* <label htmlFor="training-content">What training content did you use?</label>
-              <div className='trainingSelectors'>
-                <button type='button' className='trainingSelector'></button>
-                <button type='button' className='trainingSelector'></button>
-                <button type='button' className='trainingSelector'></button>
-              </div> 
-              <h3>Can't remember? Click here for a reminder</h3>*/}
         <label htmlFor="location-selection">
             Where did it happen?
             </label>
@@ -75,23 +70,6 @@ export default function Form( {pushAction, lastAction }) {
         <label htmlFor="partner-feelings">How do you think your partner feels about the conversation?</label>
         <SelectEmotion emotion="emotionPartner" selector={(e, em) => selectButton(e, em)} newAction={newAction}/>
         <button type='submit' id="formSubmit">Submit your action!</button>
-
     </form>
   )
 }
-
-// <button type='button' className={`emotionButton ${(newAction.emotionSelf === "happy") ? "buttonActive" : "buttonInactive"}`} value="happy" onClick={(e) => {selectButton(e, "emotionSelf")}}>
-//         <span role="img">{String.fromCodePoint('0x1F60A	')}</span>
-//           </button>
-//         <button type='button' className={`emotionButton ${(newAction.emotionSelf === "neutral") ? "buttonActive" : "buttonInactive"}`} value="neutral" onClick={(e) => {selectButton(e, "emotionSelf")}}>
-//           <span role="img" value="neutral">{String.fromCodePoint('0x1F610')}</span>
-//         </button>
-//         <button type='button' className={`emotionButton ${(newAction.emotionSelf === "sad") ? "buttonActive" : "buttonInactive"}`} value="sad" onClick={(e) => {selectButton(e, "emotionSelf")}}>
-//         <span role="img" value="sad">{String.fromCodePoint('0x1F622')}</span>
-//         </button>
-//         <button type='button' className={`emotionButton ${(newAction.emotionSelf === "confused") ? "buttonActive" : "buttonInactive"}`} value="confused" onClick={(e) => {selectButton(e, "emotionSelf")}}>
-//         <span role="img" value="confused">{String.fromCodePoint('0x1F633')}</span>
-//         </button>
-//         <button type='button' className={`emotionButton ${(newAction.emotionSelf === "excited") ? "buttonActive" : "buttonInactive"}`} value="excited" onClick={(e) => {selectButton(e, "emotionSelf")}}>
-//         <span role="img" value="excited">{String.fromCodePoint('0x1F601')}</span>
-//         </button>

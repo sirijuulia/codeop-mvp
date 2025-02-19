@@ -1,12 +1,31 @@
-import React from 'react'
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
-import '../App.css'
-import 'leaflet/dist/leaflet.css'
+import React from 'react';
+import L from 'leaflet';
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import '../App.css';
+import 'leaflet/dist/leaflet.css';
+import greenIcon from "../assets/greenMarker.png"
+import purpleIcon from "../assets/redMarker.png"
 
 export default function Map( { actions } ) {
+    const GI = new L.Icon({iconUrl: greenIcon,
+        iconRetinaUrl: greenIcon,
+        iconAnchor: [25,50],
+        popupAnchor: [0,-50],
+        shadowUrl: null,
+        shadowSize: null,
+        shadowAnchor: null,
+        iconSize: new L.Point(50, 50)})
+
+    const PI = new L.Icon({iconUrl: purpleIcon,
+        iconRetinaUrl: greenIcon,
+        iconAnchor: [25,50],
+        popupAnchor: [25,0],
+        shadowUrl: null,
+        shadowSize: null,
+        shadowAnchor: null,
+        iconSize: new L.Point(50, 50)})
   return (
     <div id="map">
-        <h1></h1>
         <MapContainer
             className="full-height-map"
             center={[55.9533, -3.18827]} 
@@ -22,6 +41,7 @@ export default function Map( { actions } ) {
             {actions.map((action, index) => (
                 <Marker
                     key={action.actionID}
+                    icon={GI}
                     position={[action.latitude, action.longtitude]}
                     >
                     <Popup>

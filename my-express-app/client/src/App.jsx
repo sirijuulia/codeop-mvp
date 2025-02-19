@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
-import './App.css'
 import 'leaflet/dist/leaflet.css'
+import './App.css'
 import arcades from './arcades.json'
 import Map from './pages/Map'
 import { NavLink, Link, Routes, Route } from 'react-router-dom'
 import Form from './pages/Form'
-
 
 function App() {
   let [actions, setActions] = useState([]);
@@ -23,7 +22,7 @@ function App() {
     const list = await response.json();
     setActions(list)}
     catch(error) {
-      console.log(`Error fetchign actions: ${error.message} `)
+      console.log(`Error fetching actions: ${error.message} `)
     }
   }
 
@@ -45,16 +44,27 @@ function App() {
 
   return (
     <>
-    <nav>
-      <h1>MOI - mapping our impact</h1>
-      <ul>
-    <NavLink to="/map">Map</NavLink>
-    <NavLink to="/form">Form</NavLink>
-    </ul>
+    <nav className="navbar">
+      <div className="logoset">
+      <img className='logo' src="../src/assets/MOI_logo.png"/>
+      <h1>mapping our impact</h1>
+      </div>
+      <NavLink to="/form" className="navLink" id="formLink">Add your conversation</NavLink>
     </nav>
     <Routes>
-      <Route path="/map" element={<Map actions={actions}/>}/>
-      <Route path="form" element={<Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/>}/>
+      <Route path="/" element={<div>
+        <Map actions={actions}/>
+        <div className='sidebar'>
+          <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
+          </div></div>
+    }/>
+      <Route path="/form/" element={
+        <div>
+          <Map actions={actions}/>
+          <div className='sidebar showSidebar'>
+          <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
+          </div></div>}/>
+          
     </Routes>
     
     </>

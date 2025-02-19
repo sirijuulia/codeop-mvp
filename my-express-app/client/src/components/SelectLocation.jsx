@@ -3,13 +3,22 @@ import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-lea
 import { useState, useEffect, useMemo, useRef } from 'react'
 import '../App.css'
 import 'leaflet/dist/leaflet.css'
-import arcades from '../arcades.json'
+import redIcon from "../assets/redMarker.png"
 
 export default function SelectLocation( { lastAction, locationSetter }) {
   const initial = {
     lat: 55.9,
     lng: -3
   }
+  const RI = new L.Icon({iconUrl: redIcon,
+        iconRetinaUrl: redIcon,
+        iconAnchor: [25,50],
+        popupAnchor: [25,0],
+        shadowUrl: null,
+        shadowSize: null,
+        shadowAnchor: null,
+        iconSize: new L.Point(50, 50)})
+  
   const [position, setPosition] = useState(initial);
   const [geolocate, setGeoLocate] = useState(false)
   const markerRef = useRef(null);
@@ -30,6 +39,7 @@ export default function SelectLocation( { lastAction, locationSetter }) {
     return position === null ? null : (
       <Marker position={position}
       ref={markerRef}
+      icon={RI}
       eventHandlers={{dragend: onDragEnd}}
       draggable={true}
       autoPan={true}>
