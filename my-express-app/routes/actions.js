@@ -1,0 +1,57 @@
+const express = require("express");
+const router = express.Router();
+const db = require("../model/helper");
+const actionExists = require("../guards/actionExists");
+/*GET all actions */
+router.get("/", async function (req, res, next) {
+  const sql = "Select * FROM actions";
+  try {
+    const results = await db(sql);
+    const response = results.data;
+    res.send(response);
+  } catch (err) {
+    res.status(500).send(`Server error: ${err}`);
+  }
+});
+
+/*POST action */
+router.post("/", async function (req, res, next) {
+  const {
+    locationType,
+    latitude,
+    longtitude,
+    actionDescription,
+    successes,
+    lessons,
+    emotionSelf,
+    emotionPartner,
+    userID,
+  } = req.body;
+  const sql = `INSERT INTO actions (locationType, latitude, longtitude, actionDescription, successes, lessons, emotionSelf, emotionPartner, userID) VALUES ("${locationType}", "${latitude}", "${longtitude}", "${actionDescription}", "${successes}", "${lessons}", "${emotionSelf}", "${emotionPartner}", "${userID}")`;
+  try {
+    await db(sql);
+    const response = await db(
+      "Select * FROM actions"
+    );
+    res.status(201).send(response.data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+/*GET specific action */
+router.get(
+  "/:id",
+  actionExists,
+  async function (req, res, next) {
+    try {
+      res.status(200).send(res.locals.action);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+);
+
+/*DELETE specific action */
+
+module.exports = router;

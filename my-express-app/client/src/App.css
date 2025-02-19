@@ -49,17 +49,30 @@ form {
   margin: 1rem;
 }
 
-.emotionSelector {
-  width: 2rem;
-  height: 2rem;
+
+.emotionButton {
+  height: 3rem;
+  width: 3rem;
   display: inline-block;
   margin: 1rem;
+  font-size: 1.5rem;
+
 }
-
-
 
 #formSubmit {
   width: 15rem;
   font-size: 1.25rem;
   height: 3rem;
+}
+
+.buttonActive {
+  background-color: red;
+}
+
+.buttonInactive {
+  background-color: black;
+}
+
+span {
+  pointer-events: none;
 }

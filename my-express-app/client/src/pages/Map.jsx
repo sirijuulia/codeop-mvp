@@ -2,16 +2,16 @@ import React from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import '../App.css'
 import 'leaflet/dist/leaflet.css'
-import arcades from '../arcades.json'
 
-export default function Map() {
+export default function Map( { actions } ) {
   return (
     <div id="map">
+        <h1></h1>
         <MapContainer
             className="full-height-map"
-            center={[arcades.features[0].geometry.coordinates[1], arcades.features[0].geometry.coordinates[0]]}
-            zoom={12}
-            minZoom={3}
+            center={[55.9533, -3.18827]} 
+            zoom={13}
+            minZoom={6}
             maxZoom={18}
             maxBounds={[[-85.06, -180], [85.06, 180]]}
             scrollWheelZoom={true}>
@@ -19,15 +19,18 @@ export default function Map() {
                 attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
                 url="https://tiles-eu.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
                 />
-            {arcades.features.map((arcade, index) => (
+            {actions.map((action, index) => (
                 <Marker
-                    key={arcade.properties['@id']}
-                    position={[arcade.geometry.coordinates[1], arcade.geometry.coordinates[0]]}
+                    key={action.actionID}
+                    position={[action.latitude, action.longtitude]}
                     >
                     <Popup>
-                        {arcade.properties.name}
+                        <h3>Description</h3>
+                        <p>{action.actionDescription}</p>
                         <br />
-                        {arcade.properties['name:en']}
+                        <h3>Left feeling: {action.emotionSelf}</h3>
+
+                        {}
                     </Popup>
                 </Marker>
                     )

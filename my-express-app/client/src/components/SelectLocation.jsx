@@ -1,15 +1,34 @@
 import React from 'react'
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
+import { useState, useMemo, useRef } from 'react'
 import '../App.css'
 import 'leaflet/dist/leaflet.css'
 import arcades from '../arcades.json'
 
-export default function SelectLocation() {
+export default function SelectLocation( { action, locationSetter }) {
+  const initial = {
+    lat: 55.9,
+    lng: -3
+  }
+  const [position, setPosition] = useState(initial);
+  const markerRef = useRef(null);
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() {
+        const marker = markerRef.current;
+        if (marker != null) {
+          setPosition(marker.getLatLng());
+          locationSetter(marker.getLatLng());
+        }
+      },
+    }),
+    [],
+  )
   return (
         <MapContainer
             className="mini-map" 
-            center={[arcades.features[0].geometry.coordinates[1], arcades.features[0].geometry.coordinates[0]]}
-            zoom={12}
+            center={initial}
+            zoom={11}
             minZoom={3}
             maxZoom={18}
             maxBounds={[[-85.06, -180], [85.06, 180]]}
@@ -19,7 +38,9 @@ export default function SelectLocation() {
                 url="https://tiles-eu.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
                 />
                 <Marker 
-                position={[arcades.features[0].geometry.coordinates[1], arcades.features[0].geometry.coordinates[0]]}
+                ref={markerRef}
+                eventHandlers={eventHandlers}
+                position={position}
                 draggable={true}
                 autoPan={true}
                 >
@@ -30,18 +51,3 @@ export default function SelectLocation() {
         </MapContainer>
   )
 }
-
-
-// arcades.features.map((arcade, index) => (
-//     <Marker
-//         key={arcade.properties['@id']}
-//         position={[arcade.geometry.coordinates[1], arcade.geometry.coordinates[0]]}
-//         >
-//         <Popup>
-//             {arcade.properties.name}
-//             <br />
-//             {arcade.properties['name:en']}
-//         </Popup>
-//     </Marker>
-//         )
-//)

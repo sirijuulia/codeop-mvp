@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import './App.css'
 import 'leaflet/dist/leaflet.css'
@@ -9,6 +9,40 @@ import Form from './pages/Form'
 
 
 function App() {
+  let [actions, setActions] = useState([]);
+  useEffect(() => {
+    getActions();
+  }, [])
+
+  const getActions = async function () {
+    try {
+    const response = await fetch("/api/actions");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    const list = await response.json();
+    setActions(list)}
+    catch(error) {
+      console.log(`Error fetchign actions: ${error.message} `)
+    }
+  }
+
+  function addAction (action) {
+    let options = {
+      method: "POST",
+      body: JSON.stringify(action),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    fetch("/api/actions/", options)
+      .then(response => response.json())
+      .then(actions => {
+        setActions(actions);
+      })
+      .catch(error => console.log(error));
+  };
+
   return (
     <>
     <nav>
@@ -19,8 +53,8 @@ function App() {
     </ul>
     </nav>
     <Routes>
-      <Route path="/map" element={<Map />}/>
-      <Route path="form" element={<Form/>}/>
+      <Route path="/map" element={<Map actions={actions}/>}/>
+      <Route path="form" element={<Form pushAction={(action) => addAction(action)}/>}/>
     </Routes>
     
     </>
