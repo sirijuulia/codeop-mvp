@@ -25,12 +25,15 @@ export default function Map( { actions } ) {
                     position={[action.latitude, action.longtitude]}
                     >
                     <Popup>
+                        <h3>{`User: ${action.username}`}</h3>
                         <h3>Description</h3>
                         <p>{action.actionDescription}</p>
-                        <br />
+                        <h3>Successes</h3>
+                        <p>{action.successes}</p>
+                        <h3>Lessons</h3>
+                        <p>{action.lessons}</p>
                         <h3>Left feeling: {action.emotionSelf}</h3>
-
-                        {}
+                        <h3>Partner left feeling: {action.emotionPartner}</h3>
                     </Popup>
                 </Marker>
                     )

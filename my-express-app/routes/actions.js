@@ -4,7 +4,8 @@ const db = require("../model/helper");
 const actionExists = require("../guards/actionExists");
 /*GET all actions */
 router.get("/", async function (req, res, next) {
-  const sql = "Select * FROM actions";
+  const sql =
+    "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID";
   try {
     const results = await db(sql);
     const response = results.data;

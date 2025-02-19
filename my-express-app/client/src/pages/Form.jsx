@@ -3,18 +3,20 @@ import SelectLocation from '../components/SelectLocation'
 import { useState } from 'react'
 import SelectEmotion from '../components/SelectEmotion'
 
-export default function Form( {pushAction }) {
-  let [newAction, setNewAction] = useState({
-    locationType : "Point",
-    latitude : 0,
-    longtitude : 0,
-    actionDescription : "",
-    successes : "",
-    lessons : "",
-    emotionSelf : "",
-    emotionPartner : "",
-    userID : 1
-  })
+const defaultAction = {
+  locationType : "Point",
+  latitude : 0,
+  longtitude : 0,
+  actionDescription : "",
+  successes : "",
+  lessons : "",
+  emotionSelf : "",
+  emotionPartner : "",
+  userID : 1
+}
+
+export default function Form( {pushAction, lastAction }) {
+  let [newAction, setNewAction] = useState(defaultAction)
 
   function handleChange (e) {
     const name = e.target.name;
@@ -27,6 +29,7 @@ export default function Form( {pushAction }) {
   function handleSubmit (e) {
     e.preventDefault();
     pushAction(newAction);
+    setNewAction(defaultAction)
   }
 
 
@@ -51,7 +54,7 @@ export default function Form( {pushAction }) {
         <label htmlFor="description">
             What was your conversation?
             </label>
-        <textarea name="actionDescription" id="description" value={newAction.actionDescription} onChange={(e) => handleChange(e)}></textarea>
+        <textarea name="actionDescription" id="description" value={newAction.actionDescription} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
               {/* <label htmlFor="training-content">What training content did you use?</label>
               <div className='trainingSelectors'>
                 <button type='button' className='trainingSelector'></button>
@@ -62,14 +65,11 @@ export default function Form( {pushAction }) {
         <label htmlFor="location-selection">
             Where did it happen?
             </label>
-        <SelectLocation id="location-selection" locationSetter={(object) => {updateLocation(object)}}/>
-            {/* <label htmlFor="current-location"> Use current location
-                <input type="checkbox" name="location" id="current-location" value="current-location" />
-              </label> */}
+        <SelectLocation id="location-selection" locationSetter={(object) => {updateLocation(object)}} lastAction={lastAction}/>
         <label htmlFor="successes">What went well?</label>
-        <input name="successes" id='successes' value={newAction.successes} onChange={(e) => handleChange(e)}/>
+        <textarea name="successes" id='successes' value={newAction.successes} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
         <label htmlFor="lessons">What will you do differently next time?</label>
-        <input name="lessons" type="text" id='lessons' value={newAction.lessons} onChange={(e) => handleChange(e)}/>
+        <textarea name="lessons" type="text" id='lessons' value={newAction.lessons} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
         <label htmlFor="self-feelings">How do you feel about the conversation?</label>
         <SelectEmotion emotion="emotionSelf" selector={(e, em) => selectButton(e, em)} newAction={newAction}/>
         <label htmlFor="partner-feelings">How do you think your partner feels about the conversation?</label>

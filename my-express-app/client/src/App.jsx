@@ -54,7 +54,7 @@ function App() {
     </nav>
     <Routes>
       <Route path="/map" element={<Map actions={actions}/>}/>
-      <Route path="form" element={<Form pushAction={(action) => addAction(action)}/>}/>
+      <Route path="form" element={<Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/>}/>
     </Routes>
     
     </>
