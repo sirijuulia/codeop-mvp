@@ -46,6 +46,18 @@ export default function Map( { actions } ) {
                 return feeling;
         }}
 
+        const toDateString = (ts) => {
+            const date = {day: "",
+                month: "",
+                year: ""
+            }
+            date.day = ts.slice(8, 10);
+            date.month = ts.slice(5, 7);
+            date.year = ts.slice(0, 4);
+            const dateString = `${date.day}/${date.month}/${date.year}`
+            return dateString;
+        }
+
   return (
     <div id="map">
         <MapContainer
@@ -70,7 +82,9 @@ export default function Map( { actions } ) {
                     autoPanPaddingTopLeft={[0,120]}
                     minWidth="300"
                     >
+                        <h4>{toDateString(action.date)}</h4>
                         <h4>{`Conversation by: ${action.username}`}</h4>
+
                         <div className="popup-feeling-container">
                             <h5>I'm feeling:</h5>
                             {emojis(action.emotionSelf)}

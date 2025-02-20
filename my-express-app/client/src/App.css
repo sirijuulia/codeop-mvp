@@ -197,6 +197,7 @@ form button {
 
 .emotionButton:hover {
   border: rgb(159, 189, 157) 6px solid;
+  cursor: pointer;
 
 }
 
@@ -233,7 +234,7 @@ span {
 /* map pop-ups */
 
 .leaflet-popup-content-wrapper {
-  background-color: rgb(228, 245, 227);
+  background-color: rgb(205, 221, 204);
   border: 5px white solid;
 }
 
@@ -247,6 +248,7 @@ span {
   font-family: "Montserrat", serif;
   font-weight: 600;
   font-size: 0.9rem;
+  margin: 0.2rem;
 }
 
 .popup-feeling-container {
@@ -254,6 +256,7 @@ span {
   grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 2fr;
+  margin-top: 1rem;
   column-gap: 0.5rem;
   row-gap: 0;
   text-align: center;
@@ -276,7 +279,7 @@ span {
   margin-top: 1rem;
   border: 2px lightgray solid;
   padding: 1rem 1.5rem;
-  border-radius: 5%;
+  border-radius: 0.75rem;
 }
 
 .popup-text-container h2 {

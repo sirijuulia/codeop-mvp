@@ -52,11 +52,13 @@ function App() {
       <NavLink to="/form" className="navLink" id="formLink">Add your conversation</NavLink>
     </nav>
     <Routes>
-      <Route path="/" element={<div>
-        <Map actions={actions}/>
-        <div className='sidebar'>
-          <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
-          </div></div>
+      <Route path="/" element={
+        <div>
+          <Map actions={actions}/>
+          <div className='sidebar'>
+            <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
+          </div>
+        </div>
     }/>
       <Route path="/form/" element={
         <div>
@@ -64,9 +66,7 @@ function App() {
           <div className='sidebar showSidebar'>
           <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
           </div></div>}/>
-          
     </Routes>
-    
     </>
   )
 }

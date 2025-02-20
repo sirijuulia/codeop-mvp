@@ -1,15 +1,11 @@
 import React from 'react'
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState,  useRef } from 'react'
 import '../App.css'
 import 'leaflet/dist/leaflet.css'
 import redIcon from "../assets/redMarker.png"
 
-export default function SelectLocation( { lastAction, locationSetter }) {
-  const initial = {
-    lat: 55.952467,
-    lng: -3.188268
-  }
+export default function SelectLocation( { locationSetter, latitude, longtitude }) {
   const RI = new L.Icon({iconUrl: redIcon,
         iconRetinaUrl: redIcon,
         iconAnchor: [25,50],
@@ -18,29 +14,26 @@ export default function SelectLocation( { lastAction, locationSetter }) {
         shadowSize: null,
         shadowAnchor: null,
         iconSize: new L.Point(50, 50)})
-  
-  const [position, setPosition] = useState(initial);
   const [geolocate, setGeoLocate] = useState(false)
   const markerRef = useRef(null);
-  const onDragEnd = 
+  const handleMarkerDrag = 
     () => {
         const marker = markerRef.current;
-        if (marker != null) {
-          setPosition(marker.getLatLng());
-          locationSetter(marker.getLatLng());}
+        if (marker) {
+          const newPos = marker.getLatLng();
+          locationSetter(newPos);}
       }
-  function LocationMarker() {
+  function LocationPlacer() {
     const map = useMapEvents({
       dblclick(e) {
-        setPosition(e.latlng)
         locationSetter(e.latlng)
       },
     })
-    return position === null ? null : (
-      <Marker position={position}
+    return latitude === null ? null : (
+      <Marker position={[latitude, longtitude]}
       ref={markerRef}
       icon={RI}
-      eventHandlers={{dragend: onDragEnd}}
+      eventHandlers={{dragend: handleMarkerDrag}}
       draggable={true}
       autoPan={true}>
       </Marker>
@@ -51,16 +44,15 @@ export default function SelectLocation( { lastAction, locationSetter }) {
     setGeoLocate(true);
     const map = useMap();
     map.locate().on("locationfound", function (e) {
-      setPosition(e.latlng);
       locationSetter(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
       }
     )
   setGeoLocate(false)
-    return position === null ? null : (
-      <Marker position={position}
+    return latitude === null ? null : (
+      <Marker position={[latitude, longtitude]}
       ref={markerRef}
-      eventHandlers={{dragend: onDragEnd}}
+      eventHandlers={{dragend: handleMarkerDrag}}
       draggable={true}
       autoPan={true}>
       </Marker>
@@ -72,7 +64,7 @@ export default function SelectLocation( { lastAction, locationSetter }) {
     
         <MapContainer
             className="mini-map" 
-            center={initial}
+            center={[latitude, longtitude]}
             zoom={14}
             minZoom={3}
             maxZoom={18}
@@ -86,7 +78,7 @@ export default function SelectLocation( { lastAction, locationSetter }) {
                 attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
                 url="https://tiles-eu.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
                 />
-                <LocationMarker />
+                <LocationPlacer />
                 {geolocate && <UseCurrentLocation />}
         </MapContainer>
         <button type="button" id="current-location" onClick={UseCurrentLocation}>Use current location</button>
