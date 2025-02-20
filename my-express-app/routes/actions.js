@@ -54,5 +54,22 @@ router.get(
 );
 
 /*DELETE specific action */
+router.delete(
+  "/:id",
+  actionExists,
+  async function (req, res, next) {
+    const actionId = req.params.id;
+    const sql = `DELETE FROM actions WHERE actionId = ${actionId}`;
+    try {
+      await db(sql);
+      const response = await db(
+        "Select * FROM actions"
+      );
+      res.status(200).send(response.data);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+);
 
 module.exports = router;

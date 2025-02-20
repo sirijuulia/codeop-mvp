@@ -31,7 +31,7 @@ CREATE TABLE actions(
     emotionSelf VARCHAR(32),
     emotionPartner VARCHAR(32),
     userID INT NOT NULL,
-    date TIMESTAMP,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (actionID),
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE cascade
     );
