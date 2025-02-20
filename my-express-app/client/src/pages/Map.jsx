@@ -24,6 +24,28 @@ export default function Map( { actions } ) {
         shadowSize: null,
         shadowAnchor: null,
         iconSize: new L.Point(50, 50)})
+
+    const emojis = (feeling) =>{
+        switch (feeling) {
+            case "happy":
+                return <span role='img'>{String.fromCodePoint('0x1F60A	')}</span>; 
+                break;
+            case "sad":
+                return <span role='img'>{String.fromCodePoint('0x1F622	')}</span>;
+                break;
+            case "confused":
+                return <span role='img'>{String.fromCodePoint('0x1F633	')}</span>;
+                break;
+            case "excited":
+                return <span role='img'>{String.fromCodePoint('0x1F601	')}</span>;
+                break;
+            case "neutral":
+                return <span role='img'>{String.fromCodePoint('0x1F610	')}</span>;
+                break;
+            default:
+                return feeling;
+        }}
+
   return (
     <div id="map">
         <MapContainer
@@ -44,16 +66,24 @@ export default function Map( { actions } ) {
                     icon={GI}
                     position={[action.latitude, action.longtitude]}
                     >
-                    <Popup>
-                        <h3>{`User: ${action.username}`}</h3>
-                        <h3>Description</h3>
-                        <p>{action.actionDescription}</p>
-                        <h3>Successes</h3>
-                        <p>{action.successes}</p>
-                        <h3>Lessons</h3>
-                        <p>{action.lessons}</p>
-                        <h3>Left feeling: {action.emotionSelf}</h3>
-                        <h3>Partner left feeling: {action.emotionPartner}</h3>
+                    <Popup 
+                    autoPanPaddingTopLeft={[0,120]}
+                    minWidth="300"
+                    >
+                        <h4>{`Conversation by: ${action.username}`}</h4>
+                        <div className="popup-feeling-container">
+                            <h5>I'm feeling:</h5>
+                            {emojis(action.emotionSelf)}
+                            <h5>I think they felt:</h5> 
+                            {emojis(action.emotionPartner)}
+                        </div>
+                        <div className="popup-text-container">
+                            <p>{action.actionDescription}</p>
+                            <h3>Successes</h3>
+                            <p>{action.successes}</p>
+                            <h3>Lessons</h3>
+                            <p>{action.lessons}</p>
+                        </div>
                     </Popup>
                 </Marker>
                     )

@@ -1,3 +1,4 @@
+/* core stuff */
 body {
   margin: 0;
 }
@@ -8,32 +9,31 @@ body {
   text-align: center;
 }
 
+/* nav links and navbar */
+
 .navbar {
   position: fixed;
   top: 0;
-  box-sizing: border-box;
   width: 100%;
+  height: 7rem;
   z-index: 15;
   display: grid;
   align-items: center;
-  gap: 30%;
   grid-template-columns: repeat(2, 1fr);
-  padding: 0 2rem;
   background-color: whitesmoke;
-  color: rgb(15, 190, 38);
-  font-family: Arial, Helvetica, sans-serif;
   border-bottom: 2px lightgray solid;
 }
 
 .navLink {
   text-decoration: none;
-  color: white;
+  color: black;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1rem;
-  border: 4px rgb(15, 190, 38) solid;
-  background-color: forestgreen;
+  border: rgb(129, 129, 129) 3px solid;
+  background-color: rgb(159, 189, 157);
   padding: 0.25rem 1rem;
+  font-family: "Montserrat", serif;
 }
 
 .navLink:hover {
@@ -45,22 +45,35 @@ body {
   justify-content: flex-start;
   align-items: center;
   justify-self: start;
+  margin: 0 2rem;
 }
 
 .logo {
-  padding: 0.5rem 1rem;
+  height: 5rem;
+  width: 5rem;
+  margin: 0 0.5rem;
+}
+
+h1 {
+  font-family: "Sour Gummy", serif;
+  font-size: 2rem;
+  color: rgb(69, 139, 64);
 }
 
 #formLink {
   justify-self: end;
   width: 6rem;
+  margin: 0 2rem;
 }
+
+/* side bar core functioning */
 
 .sidebar {
   position: fixed;
   right: 0;
   top: 0;
-  background-color: darkgray;
+  background-color: rgb(240, 240, 240);
+  border-left: 0.1rem rgb(226, 226, 226) solid;
   transform: translateX(100%);
   transition: 850ms;
 }
@@ -70,17 +83,14 @@ body {
   width: 50%;
   right: 0;
   top: 0;
+  height: 100vh;
+  overflow: scroll;
   z-index: 30;
-  background-color: darkgray;
   transform: translateX(0);
   transition: 850ms;
-  display: block;
 }
 
-.logo {
-  height: 4.5rem;
-  width: 4.5rem;
-}
+/* maps core functioning */
 
 .full-height-map {
   width: 100%;
@@ -88,42 +98,105 @@ body {
   z-index: 1;
 }
 
-.mini-map {
-  height: 250px;
-  width: 250px;
-}
+/* Form */
 
-
-h1 {
-  margin: 0.5rem 0;
-}
-
-ul {
+.sidebar-content {
+  padding: 2rem;
   display: flex;
-  justify-content: space-between;
-  grid-column: 3;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Montserrat", serif;
+
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.trainingSelector {
-  width: 4rem;
-  height: 2rem;
-  display: inline-block;
+  padding: 1rem;
   margin: 1rem;
+  width: 90%;
+
 }
 
+#closeForm {
+  align-self: last baseline;
+  width: 4rem;
+}
+
+form label {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+form label span {
+  display: block;
+  font-weight: 400;
+}
+
+.required {
+  font-size: 0.6rem;
+  vertical-align: super;
+display: inline;
+  color: rgb(185, 0, 0);
+}
+
+form h2 {
+  font-family: "Sour Gummy", serif;
+  font-size: 2rem;
+  color: rgb(69, 139, 64);
+  font-weight: 500;
+  margin: 0;
+}
+
+form textarea {
+  font-family: "Montserrat", serif;
+  width: 80%;
+  height: 4rem;
+  margin: 0.5rem;
+}
+
+.location-selection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 1rem;
+}
+
+.mini-map {
+  height: 300px;
+  width: 80%;
+  margin: 1rem;
+  border: white 2px solid;
+}
+
+#current-location {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: rgb(245, 191, 191);
+}
+
+form button {
+  font-family: "Montserrat", serif;
+}
 
 .emotionButton {
-  height: 3rem;
-  width: 3rem;
-  display: inline-block;
-  margin: 1rem;
-  font-size: 1.5rem;
+  height: 5rem;
+  width: 5rem;
+  display: inline flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  font-size: 2.5rem;
+  border: rgb(174, 175, 174) 3px solid;
+  border-radius: 50%;
+
+}
+
+.emotionButton:hover {
+  border: rgb(159, 189, 157) 6px solid;
 
 }
 
@@ -134,13 +207,94 @@ form {
 }
 
 .buttonActive {
-  background-color: red;
+  background-color: rgb(159, 189, 157);
+  border: rgb(129, 129, 129) 3px solid;
 }
 
 .buttonInactive {
-  background-color: black;
+  background-color: white;
 }
 
+/* Means that you can click on the emoji and it counts as a button click */
 span {
   pointer-events: none;
 }
+
+#formSubmit {
+  background-color: rgb(159, 189, 157);
+  margin: 1rem;
+}
+
+#formSubmit:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+/* map pop-ups */
+
+.leaflet-popup-content-wrapper {
+  background-color: rgb(228, 245, 227);
+  border: 5px white solid;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  font-family: "Montserrat", serif;
+  color: rgb(59, 59, 59);
+}
+
+.leaflet-popup-content h4 {
+  color: rgb(39, 63, 38);
+  font-family: "Montserrat", serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.popup-feeling-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 2fr;
+  column-gap: 0.5rem;
+  row-gap: 0;
+  text-align: center;
+}
+
+.popup-feeling-container span {
+  display: block;
+  font-size: 2.2rem;
+}
+
+.leaflet-popup-content h5 {
+  font-size: 1rem;
+  color: rgb(39, 63, 38);
+  font-weight: 600;
+  margin: 0;
+}
+
+.popup-text-container {
+  background-color: white;
+  margin-top: 1rem;
+  border: 2px lightgray solid;
+  padding: 1rem 1.5rem;
+  border-radius: 5%;
+}
+
+.popup-text-container h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.popup-text-container p {
+  font-size: 1rem;
+  margin: 0 0 0.2rem;
+}
+
+.popup-text-container h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.leaflet-popup-close-button span {
+  font-weight: 800;
+} 

@@ -50,26 +50,28 @@ export default function Form( {pushAction, lastAction }) {
     setNewAction(tempAction)
    }
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <div className='sidebar-content'>
       <Link id="closeForm" to="/" className="navLink">Back to map</Link>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <h2>Add your conversation!</h2>
         <label htmlFor="description">
-            What was your conversation?
+            What was your conversation? <span className='required'>*required</span>
             </label>
-        <textarea name="actionDescription" id="description" value={newAction.actionDescription} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
+        <textarea name="actionDescription" id="description" value={newAction.actionDescription} onChange={(e) => handleChange(e)} maxLength="1000" required></textarea>
         <label htmlFor="location-selection">
-            Where did it happen?
+            Where did it happen? <span className='required'>*required</span><span>Drag marker or double click to place it!</span>
             </label>
-        <SelectLocation id="location-selection" locationSetter={(object) => {updateLocation(object)}} lastAction={lastAction}/>
+        <SelectLocation className="location-selection" locationSetter={(object) => {updateLocation(object)}} lastAction={lastAction}/>
         <label htmlFor="successes">What went well?</label>
         <textarea name="successes" id='successes' value={newAction.successes} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
         <label htmlFor="lessons">What will you do differently next time?</label>
         <textarea name="lessons" type="text" id='lessons' value={newAction.lessons} onChange={(e) => handleChange(e)} maxLength="1000"></textarea>
-        <label htmlFor="self-feelings">How do you feel about the conversation?</label>
+        <label htmlFor="self-feelings">How do you feel about the conversation? <span className='required'>*required</span></label>
         <SelectEmotion emotion="emotionSelf" selector={(e, em) => selectButton(e, em)} newAction={newAction}/>
-        <label htmlFor="partner-feelings">How do you think your partner feels about the conversation?</label>
+        <label htmlFor="partner-feelings">How do you think your conversation partner feels about the conversation? <span className='required'>*required</span></label>
         <SelectEmotion emotion="emotionPartner" selector={(e, em) => selectButton(e, em)} newAction={newAction}/>
         <button type='submit' id="formSubmit">Submit your action!</button>
     </form>
+    </div>
   )
 }

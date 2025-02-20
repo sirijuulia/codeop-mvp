@@ -7,8 +7,8 @@ import redIcon from "../assets/redMarker.png"
 
 export default function SelectLocation( { lastAction, locationSetter }) {
   const initial = {
-    lat: 55.9,
-    lng: -3
+    lat: 55.952467,
+    lng: -3.188268
   }
   const RI = new L.Icon({iconUrl: redIcon,
         iconRetinaUrl: redIcon,
@@ -68,12 +68,12 @@ export default function SelectLocation( { lastAction, locationSetter }) {
     )}
 
 
-  return (<div>
-    <button type="button" onClick={UseCurrentLocation}>Use current location</button>
+  return (<div className='location-selection'>
+    
         <MapContainer
             className="mini-map" 
             center={initial}
-            zoom={11}
+            zoom={14}
             minZoom={3}
             maxZoom={18}
             maxBounds={[[-85.06, -180], [85.06, 180]]}
@@ -89,6 +89,7 @@ export default function SelectLocation( { lastAction, locationSetter }) {
                 <LocationMarker />
                 {geolocate && <UseCurrentLocation />}
         </MapContainer>
+        <button type="button" id="current-location" onClick={UseCurrentLocation}>Use current location</button>
         </div>
   )
 }
