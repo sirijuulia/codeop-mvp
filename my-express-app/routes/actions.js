@@ -32,7 +32,7 @@ router.post("/", async function (req, res, next) {
   try {
     await db(sql);
     const response = await db(
-      "Select * FROM actions"
+      "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID"
     );
     res.status(201).send(response.data);
   } catch (err) {
@@ -63,7 +63,7 @@ router.delete(
     try {
       await db(sql);
       const response = await db(
-        "Select * FROM actions"
+        "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID"
       );
       res.status(200).send(response.data);
     } catch (err) {

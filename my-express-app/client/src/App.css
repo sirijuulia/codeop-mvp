@@ -258,6 +258,7 @@ span {
 }
 
 .popup-feeling-container {
+  box-sizing: border-box;
   width: 100%;
   display: grid;
   grid-auto-flow: column;
@@ -282,11 +283,13 @@ span {
 }
 
 .popup-text-container {
+  box-sizing: border-box;
   background-color: white;
   margin-top: 1rem;
   border: 2px lightgray solid;
   padding: 1rem 1.5rem;
   border-radius: 0.75rem;
+  width: 100%;
 }
 
 .popup-text-container h2 {

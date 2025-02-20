@@ -35,3 +35,8 @@ CREATE TABLE actions(
     PRIMARY KEY (actionID),
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE cascade
     );
+
+INSERT INTO users (firstname, lastname, username, password) VALUES ("Siri", "Pantzar", "sirijuulia", "salasana"), ("Luke", "Danes", "lukesdiner", "1234"), ("Leslie", "Knope", "parksforlife", "beautifulAnn");
+
+INSERT INTO actions (locationType, latitude, longtitude, actionDescription, successes, lessons, emotionSelf, emotionPartner, userID) VALUES ("Point", "55.95104509358435", "-3.1525929387219076", "Test chat in Holyrood Park", "Good times", "It is still hard", "happy", "confused", "3"), ("Point", "55.9411649977082", "-3.1941314099749833", "Another test chat - on the Meadows", "We had an awesome time!", "More of this please", "excited", "excited", "2"), ("Point", "55.95481786189838", "-3.181766306531127", "One final test chat - Calton Hill", "It works!", "It's late", "confused", "sad", "1");
+    

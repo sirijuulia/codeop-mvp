@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { NavLink, Link, Routes, Route } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css'
 import './App.css'
-import arcades from './arcades.json'
 import Map from './pages/Map'
-import { NavLink, Link, Routes, Route } from 'react-router-dom'
 import Form from './pages/Form'
+
+
 
 function App() {
   let [actions, setActions] = useState([]);
