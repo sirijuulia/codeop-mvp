@@ -238,6 +238,12 @@ span {
   border: 5px white solid;
 }
 
+.leaflet-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
 .leaflet-popup-content-wrapper .leaflet-popup-content {
   font-family: "Montserrat", serif;
   color: rgb(59, 59, 59);
@@ -252,6 +258,7 @@ span {
 }
 
 .popup-feeling-container {
+  width: 100%;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
@@ -301,3 +308,18 @@ span {
 .leaflet-popup-close-button span {
   font-weight: 800;
 } 
+
+.deleteButton {
+  align-self: center;
+  margin: 0.3rem;
+  background-color: rgb(145, 1, 1);
+  color: white;
+  font-weight: 600;
+  border: 2px solid white;
+  padding: 0.3rem;
+}
+
+.deleteButton:hover {
+  opacity: 70%;
+  cursor: pointer;
+}

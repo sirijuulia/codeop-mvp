@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import greenIcon from "../assets/greenMarker.png"
 import purpleIcon from "../assets/redMarker.png"
 
-export default function Map( { actions } ) {
+export default function Map( { actions, user, selectForDeletion } ) {
     const GI = new L.Icon({iconUrl: greenIcon,
         iconRetinaUrl: greenIcon,
         iconAnchor: [25,50],
@@ -57,7 +57,7 @@ export default function Map( { actions } ) {
             const dateString = `${date.day}/${date.month}/${date.year}`
             return dateString;
         }
-
+        
   return (
     <div id="map">
         <MapContainer
@@ -98,6 +98,9 @@ export default function Map( { actions } ) {
                             <h3>Lessons</h3>
                             <p>{action.lessons}</p>
                         </div>
+                        { action.userID === user 
+                        ? <button className="deleteButton" onClick={() => selectForDeletion(action.actionID)}>Delete action</button> 
+                        : ""}
                     </Popup>
                 </Marker>
                     )

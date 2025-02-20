@@ -9,7 +9,9 @@ import Form from './pages/Form'
 
 function App() {
   let [actions, setActions] = useState([]);
+  const [user, setUser] = useState(0)
   useEffect(() => {
+    setUser(1)
     getActions();
   }, [])
 
@@ -42,6 +44,23 @@ function App() {
       .catch(error => console.log(error));
   };
 
+  const deleteAction = async function( id ) {
+    confirm("Are you sure you want to delete this action?")
+    let options = {
+      method: "DELETE"
+    };
+    try {
+      const response = await fetch(`/api/actions/${id}`, options);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      const list = await response.json();
+      setActions(list)}
+      catch(error) {
+      console.log(`Error fetching actions: ${error.message} `)
+    }
+  }
+
   return (
     <>
     <nav className="navbar">
@@ -54,7 +73,7 @@ function App() {
     <Routes>
       <Route path="/" element={
         <div>
-          <Map actions={actions}/>
+          <Map actions={actions} user={user} selectForDeletion={(id) => deleteAction(id)}/>
           <div className='sidebar'>
             <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
           </div>
@@ -62,7 +81,7 @@ function App() {
     }/>
       <Route path="/form/" element={
         <div>
-          <Map actions={actions}/>
+          <Map actions={actions} user={user}/>
           <div className='sidebar showSidebar'>
           <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
           </div></div>}/>
