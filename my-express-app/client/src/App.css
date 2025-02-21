@@ -25,12 +25,12 @@ body {
 }
 
 .navLink {
+  box-sizing: border-box;
   text-decoration: none;
+  text-align: center;
   color: black;
-  cursor: pointer;
   font-weight: 600;
   font-size: 1rem;
-  border: rgb(129, 129, 129) 3px solid;
   background-color: rgb(159, 189, 157);
   padding: 0.25rem 1rem;
   font-family: "Montserrat", serif;
@@ -38,6 +38,7 @@ body {
 
 .navLink:hover {
   opacity: 70%;
+  cursor: pointer;
 }
 
 .logoset {
@@ -57,16 +58,17 @@ body {
 .titleText {
   font-family: "Sour Gummy", serif;
   font-size: 2rem;
-  color: rgb(69, 139, 64);
+  color: rgb(52, 122, 47);
 }
 
 #formLink {
   justify-self: end;
-  width: 6rem;
+  width: 9rem;
   margin: 0 2rem;
 }
 
-/* makes smaller, then hides the header text when used with smaller screens */
+/* makes smaller, then hides the header text when used with smaller screens. 
+Hidden text still visible for screenreaders */
 
 @media screen and (max-width: 955px) {
   .titleText {
@@ -76,24 +78,28 @@ body {
 
 @media screen and (max-width: 600px) {
   .titleText {
-    display: none;
+    position: absolute;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
   }
 }
 
 /* side bar core functioning */
 
 .sidebar {
-  position: fixed;
-  right: 0;
-  top: 0;
   background-color: rgb(240, 240, 240);
   border-left: 0.1rem rgb(226, 226, 226) solid;
-  transform: translateX(100%);
-  transition: 850ms;
 }
 
 .showSidebar {
-  position: absolute;
+  position: fixed;
   width: 50%;
   right: 0;
   top: 0;
@@ -101,6 +107,14 @@ body {
   overflow: scroll;
   z-index: 30;
   transform: translateX(0);
+  transition: 850ms;
+}
+
+.hideSidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
   transition: 850ms;
 }
 
@@ -137,6 +151,16 @@ body {
 
 }
 
+#closeForm {
+  top: 2rem;
+  width: 6rem;
+  position: sticky;
+  align-self: last baseline;
+  z-index: 10000;
+  font-weight: 400;
+  border: white 3px solid;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -144,12 +168,6 @@ form {
   padding: 1rem;
   margin: 1rem;
   width: 90%;
-
-}
-
-#closeForm {
-  align-self: last baseline;
-  width: 4rem;
 }
 
 form label {
@@ -165,14 +183,14 @@ form label span {
 .required {
   font-size: 0.6rem;
   vertical-align: super;
-display: inline;
+  display: inline;
   color: rgb(185, 0, 0);
 }
 
 form h2 {
   font-family: "Sour Gummy", serif;
   font-size: 2rem;
-  color: rgb(69, 139, 64);
+  color: rgb(52, 122, 47);
   font-weight: 500;
   margin: 0;
 }
@@ -182,6 +200,22 @@ form textarea {
   width: 80%;
   height: 4rem;
   margin: 0.5rem;
+}
+
+.label {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-weight: 700;
+  display: inline;
+}
+
+.label span {
+  display: block;
+  font-weight: 400;
+}
+
+.label .required {
+  display: inline;
 }
 
 .location-selection {
@@ -204,6 +238,8 @@ form textarea {
   font-size: 1rem;
   font-weight: 600;
   background-color: rgb(245, 191, 191);
+  color: black;
+  cursor: pointer;
 }
 
 form button {
@@ -233,6 +269,7 @@ form button {
   width: 15rem;
   font-size: 1.25rem;
   height: 3rem;
+  font-weight: 600;
 }
 
 .buttonActive {
@@ -278,8 +315,6 @@ span {
   form textarea {
     width: 90%;
   }
-
-
   }
 
 /* map pop-ups */
@@ -293,9 +328,6 @@ span {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-}
-
-.leaflet-popup-content-wrapper .leaflet-popup-content {
   font-family: "Montserrat", serif;
   color: rgb(59, 59, 59);
 }
@@ -314,7 +346,7 @@ span {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: auto 3rem;
   margin-top: 1rem;
   column-gap: 0.5rem;
   row-gap: 0;
@@ -376,4 +408,10 @@ span {
 .deleteButton:hover {
   opacity: 70%;
   cursor: pointer;
+}
+
+.leaflet-tooltip {
+  background-color: white;
+  font-family: "Montserrat", serif;
+  opacity: 4%;
 }

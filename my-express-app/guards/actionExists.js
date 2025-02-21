@@ -7,13 +7,11 @@ async function actionExists(req, res, next) {
       `SELECT * FROM actions WHERE actionId = ${actionId}`
     );
     if (result.data.length === 1) {
-      console.log(result);
       //action found! add it to the res.locals
       res.locals.action = result.data[0];
       next();
     } else {
       //action wasn't found
-      console.log(result);
       res
         .status(404)
         .send({ error: "Action not found" });

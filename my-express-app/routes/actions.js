@@ -2,20 +2,27 @@ const express = require("express");
 const router = express.Router();
 const db = require("../model/helper");
 const actionExists = require("../guards/actionExists");
+
+// Returns all actions with the username associated with the userID, using a LEFT JOIN SQL method
+// Used in most routes
+const getActionsWithUsersSQL =
+  "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID";
+
 /*GET all actions */
 router.get("/", async function (req, res, next) {
-  const sql =
-    "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID";
   try {
-    const results = await db(sql);
+    const results = await db(
+      getActionsWithUsersSQL
+    );
     const response = results.data;
     res.send(response);
   } catch (err) {
-    res.status(500).send(`Server error: ${err}`);
+    res.status(500).send({ error: err.message });
   }
 });
 
 /*POST action */
+//Action entries have manually inputted items and additionally ActionID (auto-increment) and date (automatic timestamp in SQL)
 router.post("/", async function (req, res, next) {
   const {
     locationType,
@@ -32,11 +39,11 @@ router.post("/", async function (req, res, next) {
   try {
     await db(sql);
     const response = await db(
-      "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID"
+      getActionsWithUsersSQL
     );
     res.status(201).send(response.data);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send({ error: err.message });
   }
 });
 
@@ -46,9 +53,12 @@ router.get(
   actionExists,
   async function (req, res, next) {
     try {
+      //actionExists saves the action with specific ID in res.locals.action
       res.status(200).send(res.locals.action);
     } catch (err) {
-      res.status(500).send(err);
+      res
+        .status(500)
+        .send({ error: err.message });
     }
   }
 );
@@ -63,11 +73,13 @@ router.delete(
     try {
       await db(sql);
       const response = await db(
-        "Select a.*, u.username FROM actions AS a LEFT JOIN users AS u on a.userID=u.userID"
+        getActionsWithUsersSQL
       );
       res.status(200).send(response.data);
     } catch (err) {
-      res.status(500).send(err);
+      res
+        .status(500)
+        .send({ error: err.message });
     }
   }
 );

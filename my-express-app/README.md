@@ -17,6 +17,7 @@ Any relevant graphs
 - cd client and run npm install in the client folder
 - run npm install react n the client folder
 - run npm install --save leaflet react-leaflet n the client folder
+- run npm install react-tooltip in the client folder
 - run install react-router-dom in the client folder
 
 ### Database Prep
