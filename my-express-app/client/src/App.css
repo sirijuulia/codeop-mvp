@@ -96,9 +96,6 @@ Hidden text still visible for screenreaders */
 .sidebar {
   background-color: rgb(240, 240, 240);
   border-left: 0.1rem rgb(226, 226, 226) solid;
-}
-
-.showSidebar {
   position: fixed;
   width: 50%;
   right: 0;
@@ -106,15 +103,13 @@ Hidden text still visible for screenreaders */
   height: 100vh;
   overflow: scroll;
   z-index: 30;
-  transform: translateX(0);
+  transform: translateX(100%);
   transition: 850ms;
+
 }
 
-.hideSidebar {
-  position: fixed;
-  right: 0;
-  top: 0;
-  transform: translateX(100%);
+.showSidebar {
+  transform: translateX(0);
   transition: 850ms;
 }
 

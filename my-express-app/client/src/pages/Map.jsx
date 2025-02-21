@@ -40,6 +40,8 @@ export default function Map( { actions, user, selectForDeletion } ) {
                 return <span role='img'>{String.fromCodePoint('0x1F601	')}</span>;
             case "neutral":
                 return <span role='img'>{String.fromCodePoint('0x1F610	')}</span>;
+            case "angry":
+                return <span role='img'>{String.fromCodePoint('0x1F621')}</span>
             default:
                 return feeling;
         }}

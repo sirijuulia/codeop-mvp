@@ -88,17 +88,19 @@ function App() {
       <Route path="/" element={
         <div>
           <Map actions={actions} user={user} selectForDeletion={(id) => deleteAction(id)}/>
-          <div className='sidebar hideSidebar'>
-            <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
+          <div className='sidebar'>
+            <Form pushAction={(action) => addAction(action)}/> 
           </div>
+          
         </div>
     }/>
       <Route path="/form/" element={
         <div>
           <Map actions={actions} user={user} selectForDeletion={(id) => deleteAction(id)}/>
           <div className='sidebar showSidebar'>
-            <Form pushAction={(action) => addAction(action)} lastAction={actions[actions.length-1]}/> 
+            <Form pushAction={(action) => addAction(action)} /> 
           </div>
+
           </div>
         }/>
     </Routes>
