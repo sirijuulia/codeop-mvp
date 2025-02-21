@@ -80,7 +80,8 @@ export default function Map( { actions, user, selectForDeletion } ) {
                     >
                     <Popup 
                     autoPanPaddingTopLeft={[0,120]}
-                    minWidth="300"
+                    minWidth="275"
+                    maxWidth="275"
                     >
                         <h4>{toDateString(action.date)}</h4>
                         <h4>{`Conversation by: ${action.username}`}</h4>

@@ -49,7 +49,7 @@ function App() {
     confirm("Are you sure you want to delete this action?")
     let options = {
       method: "DELETE"
-    };
+    }
     try {
       const response = await fetch(`/api/actions/${id}`, options);
       if (!response.ok) {
@@ -67,7 +67,7 @@ function App() {
     <nav className="navbar">
       <div className="logoset">
       <img className='logo' src="../src/assets/MOI_logo.png"/>
-      <h1>mapping our impact</h1>
+      <h1 className='titleText'>mapping our impact</h1>
       </div>
       <NavLink to="/form" className="navLink" id="formLink">Add your conversation</NavLink>
     </nav>

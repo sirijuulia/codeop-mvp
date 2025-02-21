@@ -54,7 +54,7 @@ body {
   margin: 0 0.5rem;
 }
 
-h1 {
+.titleText {
   font-family: "Sour Gummy", serif;
   font-size: 2rem;
   color: rgb(69, 139, 64);
@@ -64,6 +64,20 @@ h1 {
   justify-self: end;
   width: 6rem;
   margin: 0 2rem;
+}
+
+/* makes smaller, then hides the header text when used with smaller screens */
+
+@media screen and (max-width: 955px) {
+  .titleText {
+      font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .titleText {
+    display: none;
+  }
 }
 
 /* side bar core functioning */
@@ -88,6 +102,20 @@ h1 {
   z-index: 30;
   transform: translateX(0);
   transition: 850ms;
+}
+
+/* Makes the sidebar wider, then full-screen, when using with smaller devides */
+
+@media screen and (max-width: 955px) {
+  .showSidebar {
+      width: 85%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .showSidebar {
+      width: 100%;
+  }
 }
 
 /* maps core functioning */
@@ -230,6 +258,29 @@ span {
   opacity: 70%;
   cursor: pointer;
 }
+
+/* Makes the side bar content take up more of the available space on smaller screens */
+
+@media screen and (max-width: 955px) {
+
+  .sidebar-content {
+    padding: 2rem 1rem;
+  }
+  form {
+    padding: 1rem 0;
+    margin: 1rem 0.5rem;
+  }
+
+  .mini-map {
+    width: 90%;
+  }
+
+  form textarea {
+    width: 90%;
+  }
+
+
+  }
 
 /* map pop-ups */
 
