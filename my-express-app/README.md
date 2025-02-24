@@ -93,6 +93,7 @@ Here is a somewhat complex graph with the user journey I was hoping for (green: 
 
 - Add an address layer to the map so users can search for a location insted of just using coordinates through the map or current location. This is especially important for accessibility.
 - An authentification process and an admin view, plus an individual user view for each user.
+- Commitments where people can add a commitment and then link their subsequent action to it.
 - A side panel / view that shows all the actions as a list, and perhaps allows filtering (own actions, all actions, actions this week etc.)
 - I'd like for users to be able to choose what marker to use for their actions and for those to show on the map. And/or for the markers for the user's own actions to be different from other people's markers (eg a different color)
 - Some gamification features - eg likes, or badges for users who have submitted 5/10/20 actions, etc.

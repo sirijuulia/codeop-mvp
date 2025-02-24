@@ -15,7 +15,7 @@ const defaultAction = {
   userID : 1
 }
 
-export default function Form( {pushAction, lastAction }) {
+export default function Form( {pushAction }) {
   //the key state variables collecting data from the form
   const [latitude, setLatitude] = useState(55.9533);
   const [longtitude, setLongtitude] = useState(-3.18827);
@@ -51,16 +51,15 @@ export default function Form( {pushAction, lastAction }) {
     e.preventDefault();
     {
       if 
-        (latitude 
-          && longtitude 
-          && newAction.actionDescription 
+        (
+          newAction.actionDescription 
           && newAction.emotionSelf 
           && newAction.emotionPartner) 
       { pushAction({...newAction, latitude: latitude, longtitude: longtitude});
         setNewAction(defaultAction);
         navigate("/")
       } else {
-        let alertTextFull = `please fill in the following fields: ${!newAction.latitude ? "location, ":""}${!newAction.actionDescription ? "description, ":""}${!newAction.emotionSelf ? "how you felt, ":""}${!newAction.emotionPartner ? "how your conversation partner felt, ":""}`
+        let alertTextFull = `please fill in the following fields: ${!newAction.actionDescription ? "description, ":""}${!newAction.emotionSelf ? "how you felt, ":""}${!newAction.emotionPartner ? "how your conversation partner felt, ":""}`
         let alertTextTrimmed = alertTextFull.slice(0, -2);
         alert(alertTextTrimmed)}
   }
