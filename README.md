@@ -36,10 +36,10 @@ The app uses a MySQL database with two connected tables: actions and users. The 
 Here are tables demonstrating the database.
 
 Actions table:
-![Actions table](image-1.png)
+![Actions table](actions-database.png)
 
 Users table:
-![Users table](image-2.png)
+![Users table](users-database.png)
 
 The actions router includes APIs for:
 
@@ -58,9 +58,13 @@ The maps are created using leaflet.js and with stadia map tiles & OpenStreetMap 
 
 The form uses standard inputs as well as a location selection map (in a separate component) and an emoji selector (in a separate component).
 
-![Full-screen map showing a pop-up with climate conversation info, several other pins, and "Add Your Conversation" in the navbar](image.png)
+### Map view
 
-![Sidebar view open to the left of map, with a form including a "Where did it happen?" mini map and "How do you feel about the conversation" emoji buttons](image-1.png)
+![Full-screen map showing a pop-up with climate conversation info, several other pins, and "Add Your Conversation" in the navbar](map-view.png)
+
+### Form view
+
+![Sidebar view open to the left of map, with a form including a "Where did it happen?" mini map and "How do you feel about the conversation" emoji buttons](form-view.png)
 
 ## Set-up
 
