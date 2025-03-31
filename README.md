@@ -58,9 +58,9 @@ The maps are created using leaflet.js and with stadia map tiles & OpenStreetMap 
 
 The form uses standard inputs as well as a location selection map (in a separate component) and an emoji selector (in a separate component).
 
-Here is a somewhat complex graph with the user journey I was hoping for (green: done, red, yellow and orange: not done)
+![Full-screen map showing a pop-up with climate conversation info, several other pins, and "Add Your Conversation" in the navbar](image.png)
 
-![User journey](image-4.png)
+![Sidebar view open to the left of map, with a form including a "Where did it happen?" mini map and "How do you feel about the conversation" emoji buttons](image-1.png)
 
 ## Set-up
 
